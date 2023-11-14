@@ -1,33 +1,24 @@
-document.getElementById('changeColorButton').addEventListener('click', function() {
-    changeLetterColors(['b', 'd', 'p', 'q'], 'yellow'); // Change to the desired background color
-  });
-  
-  function changeLetterColors(letters, color) {
-    var allTextNodes = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-  
-    while (allTextNodes.nextNode()) {
-      var node = allTextNodes.currentNode;
-      var text = node.nodeValue;
-  
-      for (var i = 0; i < letters.length; i++) {
-        var letter = letters[i];
-        var regex = new RegExp(letter, 'gi');
-        text = text.replace(regex, '<span class="highlight">' + letter + '</span>');
+function highlightLettersInArray() {
+  var lettersToHighlight = ['b', 'd', 'p', 'q'];
+  var allChars = document.body.innerText.split('');
+
+  for (var i = 0; i < allChars.length; i++) {
+      var char = allChars[i];
+
+      if (lettersToHighlight.includes(char.toLowerCase())) {
+          var span = document.createElement('span');
+          span.className = 'highlight';
+          span.innerText = char;
+
+          // Remplacer le caractère original par le span créé
+          allChars[i] = span.outerHTML;
       }
-  
-      var wrapper = document.createElement('div');
-      wrapper.innerHTML = text;
-  
-      while (wrapper.firstChild) {
-        node.parentNode.insertBefore(wrapper.firstChild, node);
-      }
-  
-      node.parentNode.removeChild(node);
-    }
-  
-    var highlightedLetters = document.querySelectorAll('.highlight');
-    for (var i = 0; i < highlightedLetters.length; i++) {
-        highlightedLetters[i].style.color = color;
-    }
   }
+
+  // Reconstruire le texte avec les balises ajoutées
+  var modifiedText = allChars.join('');
   
+  // Insérer le texte modifié dans le document
+  document.body.innerHTML = modifiedText;
+}
+highlightLettersInArray();
