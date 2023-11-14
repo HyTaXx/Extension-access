@@ -1,0 +1,13 @@
+h1{
+    color: red;
+}
+
+body{
+    width: 200px;
+    height: 150px;
+}
+
+.highlight {
+    background-color: yellow; /* Adjust to your desired background color */
+  }
+  
