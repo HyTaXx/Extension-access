@@ -30,6 +30,11 @@ function setFontFamily(fontFamily) {
   var elements = document.querySelectorAll('body, body *:not(i)');
   elements.forEach(function(element) {
     element.style.fontFamily = fontFamily;
+    if (fontFamily) {
+      element.style.fontSize = '105%';
+    } else {
+      element.style.fontSize = '100%';
+    }
   });
 }
 
