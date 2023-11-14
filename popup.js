@@ -1,11 +1,21 @@
-document.getElementById('colorToggle').addEventListener('click', function() {
+document.addEventListener('DOMContentLoaded', function() {
+  var colorButton = document.getElementById('colorToggle');
+  var speechButton = document.getElementById('speechToggle');
+  var closeButton = document.querySelector('.close');
+
+  colorButton.addEventListener('click', function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {color: true});
     });
   });
-  
-  document.getElementById('speechToggle').addEventListener('click', function() {
+
+  speechButton.addEventListener('click', function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {speech: true});
     });
   });
+
+  closeButton.addEventListener('click', function() {
+    window.close(); // Close the popup
+  });
+});
