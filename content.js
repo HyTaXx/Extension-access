@@ -27,7 +27,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 function setFontFamily(fontFamily) {
-  var elements = document.querySelectorAll('body, body *');
+  var elements = document.querySelectorAll('body, body *:not(i)');
   elements.forEach(function(element) {
     element.style.fontFamily = fontFamily;
   });
