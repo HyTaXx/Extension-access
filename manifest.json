@@ -1,15 +1,14 @@
 {
-    "name": "Acessibilité",
-    "version": "1.0",
-    "description": "description",
-    "permissions": ["activeTab"],
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon": {
-        "16": "img/icon32-2-16.png",
-        "32": "img/icon32-2-32.png",
-        "48": "img/icon32-2-48.png"
-      }
-    },
-    "manifest_version": 3
+  "manifest_version": 2,
+  "name": "DOM Color Changer",
+  "version": "1.0",
+  "description": "Change the background color of q, b, p, and d elements",
+  "permissions": ["activeTab"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "Change Colors"
   }
+}
