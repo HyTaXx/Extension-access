@@ -1,3 +1,22 @@
+var colorEnabled = false;
+var speechEnabled = false;
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  console.log('Message received:', request); // Log the received message
+  if (request.color) {
+    colorEnabled = !colorEnabled;
+    if (!colorEnabled) {
+      location.reload(); // Refresh the page when color is toggled off
+    } else {
+    console.log('Color enabled:', colorEnabled); // Log the new state of colorEnabled
+    updateStyles();
+    }
+  }
+  if (request.speech) {
+    speechEnabled = !speechEnabled;
+  }
+});
+
 function updateStyles() {
   var elements = document.querySelectorAll('body *');
   elements.forEach(function(element) {
@@ -6,21 +25,26 @@ function updateStyles() {
         var text = node.nodeValue;
         var newText = '';
         for (var i = 0; i < text.length; i++) {
-          switch (text[i].toLowerCase()) {
-            case 'b':
-              newText += '<span style="background-color: yellow;">' + text[i] + '</span>';
-              break;
-            case 'p':
-              newText += '<span style="background-color: blue;">' + text[i] + '</span>';
-              break;
-            case 'd':
-              newText += '<span style="background-color: red;">' + text[i] + '</span>';
-              break;
-            case 'q':
-              newText += '<span style="background-color: green;">' + text[i] + '</span>';
-              break;
-            default:
-              newText += text[i];
+          if (colorEnabled) {
+            switch (text[i].toLowerCase()) {
+              case 'b':
+                newText += '<span class="b-color">' + text[i] + '</span>';
+                break;
+              case 'p':
+                newText += '<span class="p-color">' + text[i] + '</span>';
+                break;
+              case 'd':
+                newText += '<span class="d-color">' + text[i] + '</span>';
+                break;
+              case 'q':
+                newText += '<span class="q-color">' + text[i] + '</span>';
+                break;
+              default:
+                newText += '<span class="initial-color">' + text[i] + '</span>';
+                break;
+            }
+          } else {
+            newText += '<span class="initial-color">' + text[i] + '</span>'; // No class added
           }
         }
         var newNode = document.createElement('span');
@@ -28,16 +52,5 @@ function updateStyles() {
         element.replaceChild(newNode, node);
       }
     });
-
-    element.addEventListener('mouseover', function() {
-      var msg = new SpeechSynthesisUtterance(element.textContent);
-      window.speechSynthesis.speak(msg);
-    });
-
-    element.addEventListener('mouseout', function() {
-      window.speechSynthesis.cancel();
-    });
   });
 }
-
-updateStyles();
