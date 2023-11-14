@@ -28,6 +28,15 @@ function updateStyles() {
         element.replaceChild(newNode, node);
       }
     });
+
+    element.addEventListener('mouseover', function() {
+      var msg = new SpeechSynthesisUtterance(element.textContent);
+      window.speechSynthesis.speak(msg);
+    });
+
+    element.addEventListener('mouseout', function() {
+      window.speechSynthesis.cancel();
+    });
   });
 }
 
