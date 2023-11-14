@@ -1,5 +1,6 @@
 var colorEnabled = false;
 var speechEnabled = false;
+var fontEnabled = false;
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   console.log('Message received:', request); // Log the received message
@@ -15,7 +16,22 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.speech) {
     speechEnabled = !speechEnabled;
   }
+  if (request.font) {
+    fontEnabled = !fontEnabled;
+    if (fontEnabled) {
+      setFontFamily('sans-serif');
+    } else {
+      setFontFamily('');
+    }
+  }
 });
+
+function setFontFamily(fontFamily) {
+  var elements = document.querySelectorAll('body, body *');
+  elements.forEach(function(element) {
+    element.style.fontFamily = fontFamily;
+  });
+}
 
 function updateStyles() {
   var elements = document.querySelectorAll('body *');
