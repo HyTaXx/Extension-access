@@ -12,7 +12,7 @@
   }
   body{
     min-width: 400px;
-    min-height: 500px;
+    min-height: 300px;
     background-color: #53585A;
     color: #ffffff;
   }
@@ -27,10 +27,16 @@
     border-radius: 5px;
     color: #ffffff;
     font-family: 'Montserrat', sans-serif;
+
+  }
+
+  .stock-btn button:first-child{
+    margin-top: 10px;
   }
 
   button:hover{
     cursor: pointer;
+    background-color: #e37339;
   }
 
   .stock-btn{
@@ -39,6 +45,7 @@
     height: 100%;
     gap: 20px;
     padding: 20px;
+    align-content: center;
   }
 
   .header{
@@ -58,6 +65,70 @@
   }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+  .nav {
+  
+   list-style-type: none;
+
+   margin: 0;
+   padding: 0;
+   border: 1px solid #ffffff;
+   border-radius: 3px;
+   /* width: 300px; */
+   /* overflow: hidden; */
+}
+
+.nav-item {
+   font-size: 20px;
+   /* width: 120%; */
+   background: transparent;
+   font-family: 'Montserrat', sans-serif;
+   text-align: center
+   ;
+
+}
+
+.nav-item:last-child {
+   border-bottom: none;
+}
+
+.nav-link, .nav-submenu-link {
+   text-decoration: none;
+   padding: 16px 20px;
+   display: block;
+   color: #fff;
+}
+
+.nav-submenu {
+   overflow: hidden;
+   max-height: 0;
+   transition: max-height 0.5s;
+
+}
+.nav-submenu:target {
+   max-height: 10rem;
+}
+.nav-submenu-link {
+   font-size: 16px;
+   background: transparent;
+   transition: background 0.2s ease-in;
+}
+.nav-submenu-link:hover {
+   background: #e37339;
+}
+
+
 </style>
 <html>
   <body>
@@ -69,8 +140,25 @@
       <button id="colorToggle">Color guide</button>
       <button id="speechToggle">Text to speech</button>
       <button id="fontToggle">Better font</button>
+      
+
+
+      <!-- <ul class="nav">
+   
+        <li class="nav-item">
+           <a href="#profile" class="nav-link">Choose Fonts</a>
+           <div id="profile" class="nav-submenu">
+              <a href="#" class="nav-submenu-link">Dyslexic</a>
+              <a href="#" class="nav-submenu-link">Montserrat</a>
+           </div>
+        </li>
+
+        
+     </ul> -->
+
     </div>
     <script src="popup.js"></script>
+    
   </body>
 </html>
 
